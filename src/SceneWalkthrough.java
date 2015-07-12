@@ -535,14 +535,14 @@ public class SceneWalkthrough extends JFrame implements GLEventListener, MouseLi
 			File filename = new File(currentDatafile+".png"); 
 			boolean isJpg = false;
 			if(!filename.exists()) { //Look for the USGS thumbnail for a texture.
-//				filename = new File(currentDatafile+"_thumb.jpg");
-//				if(!filename.exists()) { //Look for the default grass texture in the local directory.
+				filename = new File(currentDatafile+"_thumb.jpg");
+				if(!filename.exists()) { //Look for the default grass texture in the local directory.
 					filename = new File("grass.png");
 					if(!filename.exists()) { //Look for the default grass texture in the project root directory.
 						filename = new File(appFilePath+File.separator+"grass.png");
 					}
-//				}
-//				else isJpg = true; //If JPG thumbnail found
+				}
+				else isJpg = true; //If JPG thumbnail found
 			}
 			if(filename.exists())
 			{
