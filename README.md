@@ -1,5 +1,5 @@
 # NationalMapViewers
-Java software to visualize terrain data in GridFloat format, as provided by the USGS.
+Java software to visualize terrain data in GridFloat format, as provided by the USGS. Coded in Fall 2014 for the Fundamentals of Computer Graphics course (CS-6813-01) at the University of Tulsa.
 It provides a 3D contour plot visualization (TerrainVis.java), as well as a to-scale scene walkthrough (SceneWalkthrough.java).
 
 Note that this project is dependent on JOGL for its rendering. I made use of the following guide to quickly set up the dependency: https://jogamp.org/wiki/index.php/Setting_up_a_JogAmp_project_in_your_favorite_IDE
