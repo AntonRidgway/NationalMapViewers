@@ -22,14 +22,14 @@
  * with GridFloat data, and a default grass image.
  */
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.awt.GLJPanel;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.awt.GLJPanel;
+import com.jogamp.opengl.glu.GLU;
 import javax.swing.AbstractAction;
 import javax.swing.InputMap;
 import javax.swing.JCheckBoxMenuItem;
@@ -82,7 +82,7 @@ public class SceneWalkthrough extends JFrame implements GLEventListener, MouseLi
 	//Camera Initial Constants
 	private static final double DEFAULT_FOV = 140.0; //in degrees
 	private static final double DEFAULT_AR = (int)(((double)DEFAULT_WIDTH)/DEFAULT_HEIGHT);
-	private static final double DEFAULT_ZNEAR = 0.00001;
+	private static final double DEFAULT_ZNEAR = 0.0001;
 	private static final double DEFAULT_ZFAR = 10;
 	private static final double[] DEFAULT_POS = new double[]{0,0,5};
 	private static final double[] DEFAULT_DIR = new double[]{1,0,0};
@@ -359,18 +359,9 @@ public class SceneWalkthrough extends JFrame implements GLEventListener, MouseLi
 		topMenu.add(quitButton);
 
 		//Set up the file path for the open file dialog.
-		try {
-			CodeSource source = TerrainVis.class.getProtectionDomain().getCodeSource();
-			if(source != null)
-			{
-				String binDirectory = source.getLocation().toURI().getPath();
-				appFilePath = new File(binDirectory).getParentFile();
-			}
-			else
-				appFilePath = null;
-		} catch(URISyntaxException e) {
-			e.printStackTrace();
-		}
+		File source = new File(System.getProperty("java.class.path"));
+		String binDirectory = source.getAbsoluteFile().getParentFile().toString();
+		appFilePath = new File(binDirectory).getParentFile();
 		
 		//Set up individual components with appropriate listeners.
 		openFileButton.addActionListener(new ActionListener() {

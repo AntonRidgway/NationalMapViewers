@@ -11,14 +11,14 @@
  * the center of the display, and the mouse wheel can be used to control zoom.
  */
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.awt.GLJPanel;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.awt.GLJPanel;
+import com.jogamp.opengl.glu.GLU;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
@@ -233,18 +233,9 @@ public class TerrainVis extends Frame implements GLEventListener, MouseListener,
 		bottomPanel.add(bottomRow, BorderLayout.SOUTH);
 
 		//Set up individual components with appropriate listeners
-		try {
-			CodeSource source = TerrainVis.class.getProtectionDomain().getCodeSource();
-			if(source != null)
-			{
-				String binDirectory = source.getLocation().toURI().getPath();
-				appFilePath = new File(binDirectory).getParentFile();
-			}
-			else
-				appFilePath = null;
-		} catch(URISyntaxException e) {
-			e.printStackTrace();
-		}
+		File source = new File(System.getProperty("java.class.path"));
+		String binDirectory = source.getAbsoluteFile().getParentFile().toString();
+		appFilePath = new File(binDirectory).getParentFile();
 		
 		openFileButton = new JButton("Open File");
 		openFileButton.addActionListener(new ActionListener() {
